@@ -8,9 +8,8 @@ async function bootstrap() {
 
   
    app.enableCors({
-    origin: 'https://amazon-frontend.vercel.app', // укажите ваш домен Next.js
-    methods: 'GET, POST, PUT, DELETE',
-    allowedHeaders: 'Content-Type, Authorization', // добавьте необходимые заголовки
+    origin: true, // укажите ваш домен Next.js
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true, // если нужно передавать cookies
   });
   app.setGlobalPrefix('api')
