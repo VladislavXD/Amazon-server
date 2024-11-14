@@ -1,5 +1,5 @@
 import { IsEnum, IsOptional, IsString } from "class-validator";
-import { paginationDto } from "src/pagination/pagination.dto";
+import { paginationDto } from "../../pagination/pagination.dto";
 
 export enum EnumProductSort{
   HIGH_PRICE = 'high-price',
