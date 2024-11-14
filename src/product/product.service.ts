@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService } from '../prisma.service';
 import { productReturnObject, productReturnObjectFullest } from './product-object';
 import { ProductDto } from './dto/product.dto';
-import { generateSlug } from 'src/utils/generate-slug';
-import { PaginationService } from 'src/pagination/pagination.service';
+import { generateSlug } from '../utils/generate-slug';
+import { PaginationService } from '../pagination/pagination.service';
 import { EnumProductSort, GetAllProductDto } from './dto/getAllProduct.dto';
 import { Prisma } from '@prisma/client';
 

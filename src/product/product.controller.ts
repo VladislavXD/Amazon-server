@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Query, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { GetAllProductDto } from './dto/getAllProduct.dto';
-import { Auth } from 'src/auth/decorators/auth.decorator';
+import { Auth } from '../auth/decorators/auth.decorator';
 import { ProductDto } from './dto/product.dto';
 
 @Controller('products')

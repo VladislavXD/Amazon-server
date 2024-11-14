@@ -1,8 +1,8 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { returnCategoryObject } from './category.object';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService } from '../prisma.service';
 import { CategoryDto } from './category.dto';
-import { generateSlug } from 'src/utils/generate-slug';
+import { generateSlug } from '../utils/generate-slug';
 
 @Injectable()
 export class CategoryService {

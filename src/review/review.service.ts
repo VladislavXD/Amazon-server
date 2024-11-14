@@ -1,8 +1,8 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { returnReviewObject } from './review.object';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService } from '../prisma.service';
 import { ReviewDto } from './review.dto';
-import { generateSlug } from 'src/utils/generate-slug';
+import { generateSlug } from '../utils/generate-slug';
 
 @Injectable()
 export class ReviewService {

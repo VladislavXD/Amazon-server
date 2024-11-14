@@ -1,5 +1,5 @@
 import { Prisma } from "@prisma/client";
-import { returnUserObject } from "src/user/user-object";
+import { returnUserObject } from "../user/user-object";
 
 export const returnReviewObject:Prisma.ReviewSelect = {
   user:{
