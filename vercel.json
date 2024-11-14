@@ -1,9 +1,5 @@
 {
   "version": 2,
-  "env": {
-      "amazon_api": "@DATABASE_URL",
-      "secret_key": "@JWT_SECRET"
-  },
   "builds": [
       {
           "src": "src/main.ts",
