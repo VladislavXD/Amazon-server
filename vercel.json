@@ -1,8 +1,8 @@
 {
   "version": 2,
   "env": {
-      "DATABASE_URL": "@amazon_api_postgresql",
-      "JWT_SECRET": "@secret_key"
+      "amazon_api": "@DATABASE_URL",
+      "secret_key": "@JWT_SECRET"
   },
   "builds": [
       {
