@@ -8,13 +8,7 @@ async function bootstrap() {
 
   
     app.enableCors({
-    origin: [
-      'https://the-amazon.vercel.app',
-      'http://the-amazon.vercel.app',
-      'https://localhost:3000',
-      'http://localhost:3000',
-      'the-amazon.vercel.app'
-            ], // ваш домен Next.js с https://
+    origin: true, // ваш домен Next.js с https://
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     allowedHeaders: 'Content-Type, Authorization', // добавьте нужные заголовки, такие как Content-Type
     credentials: true, // если требуется передавать cookies
