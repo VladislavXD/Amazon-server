@@ -75,14 +75,6 @@ We welcome contributions from developers of all skill levels. Here are some ways
 - Write tests for any new functionality.
 - Make sure your code passes all the checks before submitting a pull request.
 
-## Community
-
-Join our community to stay updated and get involved:
-
-- **Slack**: [Join our Slack workspace](https://join.slack.com/amazon)
-- **Twitter**: [Follow us on Twitter](https://twitter.com/amazon)
-- **Forum**: [Participate in discussions](https://forum.amazon.com)
-
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
