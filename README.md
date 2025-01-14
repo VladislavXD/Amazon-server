@@ -1,24 +1,27 @@
 <div align="center">
-  <img src="amazon.png" alt="Amazon Modern E-Commerce Logo" width="180"/>
-</div>
+  <img src="amazon.png" alt="Amazon Modern E-Commerce Logo" width="200"/>
+  
   <h1>🛍️ Amazon - Modern E-Commerce Platform</h1>
+  <p>A powerful, scalable, and modern e-commerce solution built with <strong>NestJS</strong></p>
 
-  <p>A powerful, scalable, and modern e-commerce solution built with NestJS</p>
-
-  [![GitHub Stars](https://img.shields.io/github/stars/VladislavXD/Amazon-server?style=for-the-badge)](https://github.com/VladislavXD/Amazon-server/stargazers)
-  [![GitHub Issues](https://img.shields.io/github/issues/VladislavXD/Amazon-server?style=for-the-badge)](https://github.com/VladislavXD/Amazon-server/issues)
-  [![GitHub License](https://img.shields.io/github/license/VladislavXD/Amazon-server?style=for-the-badge)](https://github.com/VladislavXD/Amazon-server/blob/main/LICENSE)
-  [![CI Status](https://img.shields.io/github/workflow/status/VladislavXD/Amazon-server/CI?style=for-the-badge)](https://github.com/VladislavXD/Amazon-server/actions)
+  <a href="https://github.com/VladislavXD/Amazon-server/stargazers"><img src="https://img.shields.io/github/stars/VladislavXD/Amazon-server?style=for-the-badge" alt="GitHub Stars"></a>
+  <a href="https://github.com/VladislavXD/Amazon-server/issues"><img src="https://img.shields.io/github/issues/VladislavXD/Amazon-server?style=for-the-badge" alt="GitHub Issues"></a>
+  <a href="https://github.com/VladislavXD/Amazon-server/blob/main/LICENSE"><img src="https://img.shields.io/github/license/VladislavXD/Amazon-server?style=for-the-badge" alt="GitHub License"></a>
+  <a href="https://github.com/VladislavXD/Amazon-server/actions"><img src="https://img.shields.io/github/actions/workflow/status/VladislavXD/Amazon-server/ci.yml?style=for-the-badge" alt="CI Status"></a>
 </div>
+
+---
 
 ## ✨ Features
 
-- 🔍 **Smart Search Engine** - Advanced filtering and instant search capabilities
-- 🔒 **Secure Payments** - Multi-gateway integration with military-grade security
-- 📱 **Responsive Design** - Perfect experience across all devices
-- 🤖 **AI-Powered** - Smart recommendations and personalized shopping
-- 🌍 **Global Ready** - Multi-language and multi-currency support
-- ⚡ **High Performance** - Optimized for speed and scalability
+- **🔍 Smart Search Engine** - Advanced filtering and instant search capabilities
+- **🔒 Secure Payments** - Multi-gateway integration with military-grade security
+- **📱 Responsive Design** - Seamless experience on any device
+- **🤖 AI-Powered Recommendations** - Personalized shopping experience
+- **🌍 Global Ready** - Supports multiple languages and currencies
+- **⚡ High Performance** - Optimized for speed and scalability
+
+---
 
 ## 🚀 Quick Start
 
@@ -35,38 +38,49 @@ npm install
 # Start development server
 npm run start:dev
 
-# Visit http://localhost:3000 in your browser
+# Open your browser and visit: http://localhost:3000
 ```
+
+---
 
 ## 🏗️ Tech Stack
 
-- **Framework:** NestJS
+- **Backend Framework:** NestJS
 - **Database:** PostgreSQL
-- **Caching:** Redis
-- **Search:** Elasticsearch
-- **Payment:** Stripe Integration
+- **Cache:** Redis
+- **Search Engine:** Elasticsearch
+- **Payment Gateway:** Stripe
 - **Authentication:** JWT & OAuth2
+
+---
 
 ## 📖 Documentation
 
-Detailed documentation is available in our [Wiki](https://github.com/VladislavXD/Amazon-server/wiki).
+Comprehensive documentation can be found in our [Wiki](https://github.com/VladislavXD/Amazon-server/wiki).
+
+---
 
 ## 🤝 Contributing
 
-We welcome contributions! Here's how you can help:
+We welcome contributions from the community! Here's how to get started:
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
+2. Create a new branch (`git checkout -b feature/AmazingFeature`)
+3. Make your changes and commit them (`git commit -m 'Add some AmazingFeature'`)
+4. Push to your branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
+
+---
 
 ## 📝 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
 
 <div align="center">
-  <sub>Built with ❤️ by the Amazon Team</sub>
+  <sub>Created with ❤️ by the Amazon Team</sub>
+  <br><br>
+  <strong>Version 1.0.1</strong>
 </div>
+
