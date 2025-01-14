@@ -12,9 +12,17 @@
   <a href="https://github.com/VladislavXD/Amazon-server/blob/main/LICENSE" target="_blank"><img src="https://img.shields.io/github/license/VladislavXD/Amazon-server" alt="License" /></a>
 </p>
 
+<p align="center">
+  <img src="https://via.placeholder.com/800x400.png?text=Amazon+E-Commerce+Platform" alt="Amazon E-Commerce Platform" />
+</p>
+
 ## About the Project
 
 **Amazon** is a feature-rich, scalable, and user-friendly e-commerce platform designed to revolutionize online shopping. We are excited to collaborate with developers from around the world who are passionate about building innovative and cutting-edge solutions. Whether you're a seasoned professional or a budding developer, your contributions are valuable to us.
+
+<p align="center">
+  <img src="https://via.placeholder.com/800x400.png?text=Advanced+Search+and+Filtering" alt="Advanced Search and Filtering" />
+</p>
 
 ### Key Features
 
@@ -26,6 +34,10 @@
 - **Multi-language Support**: Shop in your preferred language.
 
 ## Getting Started
+
+<p align="center">
+  <img src="https://via.placeholder.com/800x400.png?text=Getting+Started" alt="Getting Started" />
+</p>
 
 To get started with the project, follow these steps:
 
@@ -62,6 +74,14 @@ We welcome contributions from developers of all skill levels. Here are some ways
 - Ensure your code follows our [coding standards](CONTRIBUTING.md).
 - Write tests for any new functionality.
 - Make sure your code passes all the checks before submitting a pull request.
+
+## Community
+
+Join our community to stay updated and get involved:
+
+- **Slack**: [Join our Slack workspace](https://join.slack.com/amazon)
+- **Twitter**: [Follow us on Twitter](https://twitter.com/amazon)
+- **Forum**: [Participate in discussions](https://forum.amazon.com)
 
 ## License
 
