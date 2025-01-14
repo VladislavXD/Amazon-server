@@ -1,89 +1,78 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+  <a href="https://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<h1 align="center">Amazon - The Modern E-Commerce Platform</h1>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
+<p align="center">
+  <a href="https://github.com/VladislavXD/Amazon-server" target="_blank"><img src="https://img.shields.io/github/stars/VladislavXD/Amazon-server" alt="GitHub Stars" /></a>
+  <a href="https://github.com/VladislavXD/Amazon-server/issues" target="_blank"><img src="https://img.shields.io/github/issues/VladislavXD/Amazon-server" alt="Issues" /></a>
+  <a href="https://github.com/VladislavXD/Amazon-server" target="_blank"><img src="https://img.shields.io/github/forks/VladislavXD/Amazon-server" alt="Forks" /></a>
+  <a href="https://github.com/VladislavXD/Amazon-server/actions" target="_blank"><img src="https://github.com/VladislavXD/Amazon-server/workflows/CI/badge.svg" alt="CI Status" /></a>
+  <a href="https://github.com/VladislavXD/Amazon-server/blob/main/LICENSE" target="_blank"><img src="https://img.shields.io/github/license/VladislavXD/Amazon-server" alt="License" /></a>
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+## About the Project
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+**Amazon** is a feature-rich, scalable, and user-friendly e-commerce platform designed to revolutionize online shopping. We are excited to collaborate with developers from around the world who are passionate about building innovative and cutting-edge solutions. Whether you're a seasoned professional or a budding developer, your contributions are valuable to us.
 
-## Project setup
+### Key Features
 
-```bash
-$ npm install
-```
+- **Advanced Search and Filtering**: Find products quickly with our powerful search and filtering options.
+- **User Reviews and Ratings**: Read and write reviews to make informed purchasing decisions.
+- **Secure Payment Gateway**: Multiple payment options with top-notch security.
+- **Responsive Design**: Seamless shopping experience across all devices.
+- **Personalized Recommendations**: AI-driven recommendations to enhance the shopping experience.
+- **Multi-language Support**: Shop in your preferred language.
 
+## Getting Started
 
-## ПИСЯ ПОПА
+To get started with the project, follow these steps:
 
-## Compile and run the project
+1. **Clone the Repository**:
+    ```bash
+    git clone https://github.com/VladislavXD/Amazon-server.git
+    cd Amazon-server
+    ```
 
-```bash
-# development
-$ npm run start
+2. **Install Dependencies**:
+    ```bash
+    npm install
+    ```
 
-# watch mode
-$ npm run start:dev
+3. **Run the Development Server**:
+    ```bash
+    npm start
+    ```
 
-# production mode
-$ npm run start:prod
-```
+4. **Open Your Browser**:
+    Navigate to `http://localhost:3000` to see the application in action.
 
-## Run tests
+## Contributing
 
-```bash
-# unit tests
-$ npm run test
+We welcome contributions from developers of all skill levels. Here are some ways you can contribute:
 
-# e2e tests
-$ npm run test:e2e
+- **Report Bugs**: If you find a bug, please report it using the issue tracker.
+- **Feature Requests**: Have an idea for a new feature? Submit a feature request.
+- **Code Contributions**: Fork the repository, make your changes, and submit a pull request.
+- **Documentation**: Improve our documentation to help others get started quickly.
 
-# test coverage
-$ npm run test:cov
-```
+### Contribution Guidelines
 
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Ensure your code follows our [coding standards](CONTRIBUTING.md).
+- Write tests for any new functionality.
+- Make sure your code passes all the checks before submitting a pull request.
 
 ## License
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
-# Amazon-server
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Acknowledgements
+
+We would like to thank all the contributors and the open-source community for their support.
+
+---
+
+Happy coding!
+
+The Amazon Team
