@@ -1,89 +1,86 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+<div align="center">
+  <img src="amazon.png" alt="Amazon Modern E-Commerce Logo" width="200"/>
+  
+  <h1>🛍️ Amazon - Modern E-Commerce Platform</h1>
+  <p>A powerful, scalable, and modern e-commerce solution built with <strong>NestJS</strong></p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+  <a href="https://github.com/VladislavXD/Amazon-server/stargazers"><img src="https://img.shields.io/github/stars/VladislavXD/Amazon-server?style=for-the-badge" alt="GitHub Stars"></a>
+  <a href="https://github.com/VladislavXD/Amazon-server/issues"><img src="https://img.shields.io/github/issues/VladislavXD/Amazon-server?style=for-the-badge" alt="GitHub Issues"></a>
+  <a href="https://github.com/VladislavXD/Amazon-server/blob/main/LICENSE"><img src="https://img.shields.io/github/license/VladislavXD/Amazon-server?style=for-the-badge" alt="GitHub License"></a>
+  <a href="https://github.com/VladislavXD/Amazon-server/actions"><img src="https://img.shields.io/github/actions/workflow/status/VladislavXD/Amazon-server/ci.yml?style=for-the-badge" alt="CI Status"></a>
+</div>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## ✨ Features
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **🔍 Smart Search Engine** - Advanced filtering and instant search capabilities
+- **🔒 Secure Payments** - Multi-gateway integration with military-grade security
+- **📱 Responsive Design** - Seamless experience on any device
+- **🤖 AI-Powered Recommendations** - Personalized shopping experience
+- **🌍 Global Ready** - Supports multiple languages and currencies
+- **⚡ High Performance** - Optimized for speed and scalability
 
-## Project setup
+---
+
+## 🚀 Quick Start
 
 ```bash
-$ npm install
+# Clone the repository
+git clone https://github.com/VladislavXD/Amazon-server.git
+
+# Navigate to project directory
+cd Amazon-server
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run start:dev
+
+# Open your browser and visit: http://localhost:3000
 ```
 
+---
 
-## ПИСЯ ПОПА
+## 🏗️ Tech Stack
 
-## Compile and run the project
+- **Backend Framework:** NestJS
+- **Database:** PostgreSQL
+- **Cache:** Redis
+- **Search Engine:** Elasticsearch
+- **Payment Gateway:** Stripe
+- **Authentication:** JWT & OAuth2
 
-```bash
-# development
-$ npm run start
+---
 
-# watch mode
-$ npm run start:dev
+## 📖 Documentation
 
-# production mode
-$ npm run start:prod
-```
+Comprehensive documentation can be found in our [Wiki](https://github.com/VladislavXD/Amazon-server/wiki).
 
-## Run tests
+---
 
-```bash
-# unit tests
-$ npm run test
+## 🤝 Contributing
 
-# e2e tests
-$ npm run test:e2e
+We welcome contributions from the community! Here's how to get started:
 
-# test coverage
-$ npm run test:cov
-```
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature/AmazingFeature`)
+3. Make your changes and commit them (`git commit -m 'Add some AmazingFeature'`)
+4. Push to your branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## Resources
+---
 
-Check out a few resources that may come in handy when working with NestJS:
+## 📝 License
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-## Support
+---
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+<div align="center">
+  <sub>Created with ❤️ by the Amazon Team</sub>
+  <br><br>
+  <strong>Version 1.0.1</strong>
+</div>
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
-# Amazon-server
