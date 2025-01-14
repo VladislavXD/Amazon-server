@@ -33,7 +33,7 @@ $ npm install
 ```
 
 
-## ПИСЯ ПОПА`
+## ПИСЯ ПОПА
 
 ## Compile and run the project
 
