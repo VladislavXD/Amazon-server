@@ -1,8 +1,6 @@
 <div align="center">
-  <a href="https://github.com/VladislavXD/Amazon-server">
-    <img src="https://raw.githubusercontent.com/VladislavXD/Amazon-server/main/assets/logo.svg" alt="Amazon Modern E-Commerce" width="180"/>
-  </a>
-
+  <img src="amazon.png" alt="Amazon Modern E-Commerce Logo" width="180"/>
+</div>
   <h1>🛍️ Amazon - Modern E-Commerce Platform</h1>
 
   <p>A powerful, scalable, and modern e-commerce solution built with NestJS</p>
