@@ -1,6 +1,3 @@
-I'll help you improve the README.md file for your Amazon server project. I'll create a more modern, cleaner design with better visuals and more engaging text. Here's my suggestion:
-
-```markdown
 <div align="center">
   <a href="https://github.com/VladislavXD/Amazon-server">
     <img src="https://raw.githubusercontent.com/VladislavXD/Amazon-server/main/assets/logo.svg" alt="Amazon Modern E-Commerce" width="180"/>
