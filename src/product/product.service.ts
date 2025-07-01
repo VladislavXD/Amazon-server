@@ -15,7 +15,7 @@ export class ProductService {
   ){}
 
   async getAll(dto: GetAllProductDto){
-    const {sort, searchTerm} = dto  
+    const {sort, searchTerm, categorySlug} = dto  
 
     const prismaSort:Prisma.ProductOrderByWithRelationInput[] = []
 
@@ -29,6 +29,7 @@ export class ProductService {
       {prismaSort.push({createdAt: 'asc'})}
     else
       {prismaSort.push({createdAt: 'desc'})}
+
 
     const prismaSearchTermFilter: Prisma.ProductWhereInput = searchTerm ? {
       OR: [
@@ -59,9 +60,18 @@ export class ProductService {
       ]
     } : {}
 
+    const prismaCategoryFilter: Prisma.ProductWhereInput = categorySlug ? {
+      category: {
+        slug: categorySlug
+      }
+    } : {}
+
     const {perPage, skip} = this.paginationService.getPagination(dto)
     const products = await this.prisma.product.findMany({
-      where: prismaSearchTermFilter,
+      where: {
+        ...prismaSearchTermFilter,
+        ...prismaCategoryFilter
+      },
       orderBy: prismaSort,
       skip,
       take: perPage,
@@ -71,7 +81,10 @@ export class ProductService {
     return {
       products,
       length: await this.prisma.product.count({
-        where: prismaSearchTermFilter
+        where: {
+          ...prismaSearchTermFilter,
+          ...prismaCategoryFilter
+        }
       })
     }
   }
