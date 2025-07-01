@@ -3,43 +3,30 @@ import { AppModule } from './app.module';
 
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, {cors: true});
+  try {
+    const app = await NestFactory.create(AppModule);
 
-  // Configure CORS for production and development
-  app.enableCors({
-    origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps or curl requests)
-      if (!origin) return callback(null, true);
-      
-      const allowedOrigins = [
-        'http://localhost:3000',
-        'https://localhost:3000',
-        'http://localhost:3001',
-        'https://localhost:3001',
-        'https://the-amazon.vercel.app',
-        'https://amazon-client-blue.vercel.app'
-      ];
-      
-      // Allow any vercel.app domain
-      if (origin.endsWith('.vercel.app') || allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-      
-      callback(new Error('Not allowed by CORS'));
-    },
-    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With'], 
-    credentials: true,
-    preflightContinue: false,
-    optionsSuccessStatus: 204
-  });
+    // Configure CORS for production and development
+    app.enableCors({
+      origin: true, // Allow all origins for now to debug
+      methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
+      allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With'], 
+      credentials: true,
+      preflightContinue: false,
+      optionsSuccessStatus: 204
+    });
 
-  app.setGlobalPrefix('api')
-  
-  // Use dynamic port for Vercel deployment
-  const port = process.env.PORT || 3500;
-  await app.listen(port); 
-  
-  console.log(`Application is running on: ${await app.getUrl()}`);
+    app.setGlobalPrefix('api')
+    
+    // Use dynamic port for Vercel deployment
+    const port = process.env.PORT || 3500;
+    await app.listen(port); 
+    
+    console.log(`Application is running on: ${await app.getUrl()}`);
+    console.log(`Server listening on port: ${port}`);
+  } catch (error) {
+    console.error('Error starting the application:', error);
+    process.exit(1);
+  }
 }
 bootstrap();
