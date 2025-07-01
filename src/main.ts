@@ -5,20 +5,33 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {cors: true});
 
-
-  
+  // Configure CORS for production and development
   app.enableCors({
-    origin: [
-      'http://localhost:3000',
-      'localhost:3000',
-      'https://the-amazon.vercel.app',
-      'http://the-amazon.vercel.app',
-      'https://localhost:3000',
-      'the-amazon.vercel.app'
-            ],
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-    allowedHeaders: 'Content-Type, Authorization', 
-    credentials: true, 
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+      
+      const allowedOrigins = [
+        'http://localhost:3000',
+        'https://localhost:3000',
+        'http://localhost:3001',
+        'https://localhost:3001',
+        'https://the-amazon.vercel.app',
+        'https://amazon-client-blue.vercel.app'
+      ];
+      
+      // Allow any vercel.app domain
+      if (origin.endsWith('.vercel.app') || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      
+      callback(new Error('Not allowed by CORS'));
+    },
+    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With'], 
+    credentials: true,
+    preflightContinue: false,
+    optionsSuccessStatus: 204
   });
 
   app.setGlobalPrefix('api')
