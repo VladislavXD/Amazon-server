@@ -77,6 +77,7 @@ async function bootstrap() {
 
 			'Access-Control-Allow-Headers',
 
+			
 
 		],
 
