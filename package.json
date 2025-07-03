@@ -23,6 +23,7 @@
     "seed": "ts-node seeder/seed.ts"
   },
   "dependencies": {
+    "@a2seven/yoo-checkout": "^1.1.4",
     "@faker-js/faker": "^9.0.0",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.2.3",
@@ -38,7 +39,9 @@
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.2.0",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "uuid": "^11.1.0",
+    "yookassa": "^0.1.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
