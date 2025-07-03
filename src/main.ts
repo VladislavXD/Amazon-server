@@ -67,7 +67,16 @@ async function bootstrap() {
 
 			'Origin',
 
-			'X-Requested-With'
+			'X-Requested-With',
+
+			'Access-Control-Allow-Origin',
+
+			'Access-Control-Allow-Credentials',
+
+			'Access-Control-Allow-Methods',
+
+			'Access-Control-Allow-Headers',
+
 
 		],
 

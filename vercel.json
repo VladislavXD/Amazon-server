@@ -23,12 +23,12 @@
           "dest": "src/main.ts",
 
           "methods": [
+              "OPTIONS",
 
               "GET",
 
               "POST",
 
-              "OPTIONS",
 
               "PUT",
 
