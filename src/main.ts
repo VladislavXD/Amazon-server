@@ -4,34 +4,44 @@ import { AppModule } from './app.module'
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule, { cors: true })
 
+	// Handle preflight requests explicitly
+	app.use((req, res, next) => {
+		if (req.method === 'OPTIONS') {
+			const origin = req.headers.origin;
+			console.log('Preflight request from origin:', origin);
+			
+			// Allow all vercel.app domains and localhost
+			if (!origin || origin.endsWith('.vercel.app') || 
+				origin.includes('localhost') || 
+				['https://the-amazon.vercel.app', 'https://amazon-client-blue.vercel.app'].includes(origin)) {
+				
+				res.header('Access-Control-Allow-Origin', origin || '*');
+				res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS,PATCH');
+				res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Accept, Origin, X-Requested-With');
+				res.header('Access-Control-Allow-Credentials', 'true');
+				res.header('Access-Control-Max-Age', '86400');
+				
+				console.log('Preflight approved for:', origin);
+				return res.status(200).end();
+			}
+			
+			console.log('Preflight denied for:', origin);
+		}
+		next();
+	});
+
 	// Configure CORS for production and development
 	app.enableCors({
 		origin: (origin, callback) => {
-			console.log('CORS Origin Check:', origin);
-			
 			// Allow requests with no origin (like mobile apps or curl requests)
 			if (!origin) return callback(null, true)
 
-			const allowedOrigins = [
-				'http://localhost:3000',
-				'https://localhost:3000',
-				'http://localhost:3001',
-				'https://localhost:3001',
-				'https://the-amazon.vercel.app',
-				'https://amazon-client-blue.vercel.app',
-				// Добавляем поддержку переменных окружения для динамических доменов
-				process.env.FRONTEND_URL,
-				process.env.CLIENT_URL
-			].filter(Boolean) // Убираем undefined значения
-			
-			// Allow any vercel.app domain or specifically allowed origins
-			if (origin.endsWith('.vercel.app') || allowedOrigins.includes(origin)) {
-				console.log('CORS Origin ALLOWED:', origin);
+			// Allow all vercel.app domains and localhost
+			if (origin.endsWith('.vercel.app') || origin.includes('localhost') ||
+				['https://the-amazon.vercel.app', 'https://amazon-client-blue.vercel.app'].includes(origin)) {
 				return callback(null, true)
 			}
 			
-			console.log('CORS Origin DENIED:', origin);
-			console.log('Allowed origins:', allowedOrigins);
 			callback(new Error('Not allowed by CORS'))
 		},
 		methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
@@ -40,18 +50,11 @@ async function bootstrap() {
 			'Authorization',
 			'Accept',
 			'Origin',
-			'X-Requested-With',
-			'Access-Control-Allow-Origin',
-			'Access-Control-Allow-Headers',
-			'Access-Control-Allow-Methods'
-		],
-		exposedHeaders: [
-			'Access-Control-Allow-Origin',
-			'Access-Control-Allow-Headers'
+			'X-Requested-With'
 		],
 		credentials: true,
 		preflightContinue: false,
-		optionsSuccessStatus: 204
+		optionsSuccessStatus: 200
 	})
 
 	app.setGlobalPrefix('api')
