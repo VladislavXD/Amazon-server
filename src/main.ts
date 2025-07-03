@@ -5,18 +5,22 @@ async function bootstrap() {
 	const app = await NestFactory.create(AppModule, { cors: true })
 
 	// Configure CORS for production and development
-	app.enableCors({
-  origin: [
-    'https://the-amazon.vercel.app',
-    'https://amazon-client-blue.vercel.app',
-    'http://localhost:3000'
-  ],
-  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-  credentials: true,
-  optionsSuccessStatus: 204
-})
+// 	app.enableCors({
+//   origin: [
+//     'https://the-amazon.vercel.app',
+//     'https://amazon-client-blue.vercel.app',
+//     'http://localhost:3000'
+//   ],
+//   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
+//   allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+//   credentials: true,
+//   optionsSuccessStatus: 204
+// })
 
+	app.enableCors({
+		origin: true, // автоматически возвращает Origin-заголовок обратно
+		credentials: true
+	})
 
 	app.setGlobalPrefix('api')
 
