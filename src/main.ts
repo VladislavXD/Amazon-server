@@ -18,8 +18,66 @@ async function bootstrap() {
 // })
 
 	app.enableCors({
-		origin: true, // автоматически возвращает Origin-заголовок обратно
-		credentials: true
+
+		origin: (origin, callback) => {
+
+			// Allow requests with no origin (like mobile apps or curl requests)
+
+
+			if (!origin) return callback(null, true)
+
+
+			const allowedOrigins = [
+
+				'http://localhost:3000',
+
+				'https://localhost:3000',
+
+				'http://localhost:3001',
+
+				'https://localhost:3001',
+
+				'https://the-amazon.vercel.app',
+
+				'https://amazon-client-blue.vercel.app'
+
+			]
+
+			// Allow any vercel.app domain
+
+			if (origin.endsWith('.vercel.app') || allowedOrigins.includes(origin)) {
+
+				return callback(null, true)
+
+			}
+
+			callback(new Error('Not allowed by CORS'))
+
+		},
+
+		methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
+
+		allowedHeaders: [
+
+			'Content-Type',
+
+			'Authorization',
+
+			'Accept',
+
+			'Origin',
+
+			'X-Requested-With'
+
+		],
+
+		credentials: true,
+
+		preflightContinue: false,
+
+
+		optionsSuccessStatus: 204
+
 	})
 
 	app.setGlobalPrefix('api')

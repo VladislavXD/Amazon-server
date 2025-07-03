@@ -25,7 +25,6 @@
   "dependencies": {
     "@a2seven/yoo-checkout": "^1.1.4",
     "@faker-js/faker": "^9.0.0",
-    "@heroui/react": "2.7.5",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.2.3",
     "@nestjs/core": "^10.0.0",
