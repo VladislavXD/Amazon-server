@@ -5,45 +5,25 @@
   "builds": [
 
       {
-
           "src": "src/main.ts",
-
           "use": "@vercel/node"
-
       }
-
   ],
-
   "routes": [
 
       {
-
-          "src": "/(.*)",
-
+          "src": "/api/(.*)",
           "dest": "src/main.ts",
-
           "methods": [
               "OPTIONS",
-
               "GET",
-
               "POST",
-
-
               "PUT",
-
               "DELETE",
-
               "PATCH"
-
-          ],
-            "headers": {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "OPTIONS, GET, POST, PUT, DELETE, PATCH",
-                "Access-Control-Allow-Headers": "Content-Type, Authorization"
-            }
-
+          ]
       }
+      
 
   ]
 

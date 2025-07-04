@@ -6,8 +6,17 @@ async function bootstrap() {
 
 	// Configure CORS for production and development
 	app.enableCors({
-		origin: true, // Разрешаем все домены временно для отладки
-		methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
+  origin: [
+				'http://localhost:3000',
+				'https://localhost:3000',
+				'http://localhost:3001',
+				'https://localhost:3001',
+				'https://the-amazon.vercel.app',
+				'https://amazon-client-blue.vercel.app',
+				'https://amazon-server-jade.vercel.app',
+				'https://amazon-client-6tb2ry6ts-vladislavdevs-projects.vercel.app/'
+  ],
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
 		allowedHeaders: [
 			'Content-Type',
 			'Authorization',
@@ -17,8 +26,8 @@ async function bootstrap() {
 		],
 		credentials: true,
 		preflightContinue: false,
-		optionsSuccessStatus: 200
-	})
+		optionsSuccessStatus: 204
+})
 
 	app.setGlobalPrefix('api')
 
