@@ -3,10 +3,10 @@ import { PrismaService } from '../prisma.service';
 import { OrderDto } from './order.dto';
 import { productReturnObject } from 'src/product/product-object';
 
-import * as YooKassa from 'yookassa'
 import { PaymentStatusDto } from './payment-status.dto';
 import { EnumOrderStatus } from '@prisma/client';
 
+const YooKassa = require('yookassa');
 
 
 const yooKassa = new YooKassa({
