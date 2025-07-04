@@ -6,8 +6,8 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "prisma generate && prisma db push && nest build",
-    "vercel-build": "prisma generate && prisma db push && nest build",
+    "build": "prisma generate && nest build",
+    "vercel-build": "prisma generate && prisma db push --force-reset && nest build",
     "postinstall": "prisma generate",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",

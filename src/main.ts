@@ -2,42 +2,47 @@ import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
 
 async function bootstrap() {
-	const app = await NestFactory.create(AppModule, { cors: true })
+	try {
+		console.log('Starting application...')
+		console.log('Environment check:')
+		console.log('DATABASE_URL exists:', !!process.env.DATABASE_URL)
+		console.log('NODE_ENV:', process.env.NODE_ENV)
+		
+		const app = await NestFactory.create(AppModule, { 
+			cors: true,
+			logger: ['error', 'warn', 'log']
+		})
 
-	// Configure CORS for production and development
-	app.enableCors({
-  origin: [
-				'http://localhost:3000',
-				'https://localhost:3000',
-				'http://localhost:3001',
-				'https://localhost:3001',
-				'https://the-amazon.vercel.app',
-				'https://amazon-client-blue.vercel.app',
-				'https://amazon-server-jade.vercel.app',
-				'https://amazon-client-6tb2ry6ts-vladislavdevs-projects.vercel.app/'
-  ],
-  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
-		allowedHeaders: [
-			'Content-Type',
-			'Authorization',
-			'Accept',
-			'Origin',
-			'X-Requested-With'
-		],
-		credentials: true,
-		preflightContinue: false,
-		optionsSuccessStatus: 204
-})
+		console.log('NestJS app created successfully')
 
-	app.setGlobalPrefix('api')
+		// Configure CORS for production and development
+		app.enableCors({
+			origin: true, // Разрешаем все origins для диагностики
+			methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
+			allowedHeaders: [
+				'Content-Type',
+				'Authorization',
+				'Accept',
+				'Origin',
+				'X-Requested-With'
+			],
+			credentials: true,
+			preflightContinue: false,
+			optionsSuccessStatus: 200
+		})
 
-	// Use dynamic port for Vercel deployment
+		app.setGlobalPrefix('api')
 
-	const port = process.env.PORT || 3500
+		// Use dynamic port for Vercel deployment
+		const port = process.env.PORT || 3500
 
-	await app.listen(port)
+		await app.listen(port)
 
-	console.log(`Application is running on: ${await app.getUrl()}`)
+		console.log(`Application is running on: ${await app.getUrl()}`)
+	} catch (error) {
+		console.error('Failed to start application:', error)
+		process.exit(1)
+	}
 }
 
 bootstrap()
