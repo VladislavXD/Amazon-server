@@ -1,12 +1,18 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Query, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { GetAllProductDto } from './dto/getAllProduct.dto';
-import { Auth } from '../auth/decorators/auth.decorator';
+import { Auth, OptionalJwtAuthGuard } from '../auth/decorators/auth.decorator';
 import { ProductDto } from './dto/product.dto';
+import { ProductViewDto, PopularProductsDto, RecentlyViewedDto } from './dto/product-view.dto';
+import { CurrentUser } from '../auth/decorators/user.decorator';
+import { ProductAnalyticsService } from './product-analytics.service';
 
 @Controller('products')
 export class ProductController {
-	constructor(private readonly productService: ProductService) {}
+	constructor(
+		private readonly productService: ProductService,
+		private readonly analyticsService: ProductAnalyticsService
+	) {}
 
 	@UsePipes(new ValidationPipe())
 	@Get()
@@ -53,8 +59,59 @@ export class ProductController {
 	}
 
 	@Get(':id')
+	async getProduct(@Param('id') id: string, @CurrentUser('id') userId?: number) {
+		return this.productService.byId(+id, userId)
+	}
+
+
+
+	//  работа с просмотрами
+	@Post('view/:id')
+	@HttpCode(200)
+	@UseGuards(OptionalJwtAuthGuard)
+	async addView(@Param('id') id: string, @CurrentUser('id') userId?: number ) {
+		return this.productService.addView({ 
+			productId: +id, 
+			userId
+		});
+	}
+
+	@Get('popular/list')
+	async getPopularProducts(@Query() dto: PopularProductsDto) {
+		return this.productService.getPopularProducts(dto);
+	}
+
+	@Get('recently-viewed/list')
 	@Auth()
-	async getProduct(@Param('id') id: string) {
-		return this.productService.byId(+id)
+	async getRecentlyViewed(@CurrentUser('id') id: number, @Query() dto: Omit<RecentlyViewedDto, 'userId'>) {
+		return this.productService.getRecentlyViewed({ 
+			userId: id, 
+			...dto 
+		});
+	}
+
+	@Get('views-count/:id')
+	async getViewsCount(@Param('id') id: string) {
+		return this.productService.getViewsCount(+id);
+	}
+
+	// аналитика для админки
+	
+	@Get('analytics/statistics')
+	@Auth()
+	async getViewsStatistics(@Query('days') days?: string) {
+		return this.analyticsService.getViewsStatistics(days ? +days : 30);
+	}
+
+	@Get('analytics/trends')
+	@Auth()
+	async getViewsTrends(@Query('days') days?: string) {
+		return this.analyticsService.getViewsTrends(days ? +days : 7);
+	}
+
+	@Get('analytics/categories')
+	@Auth()
+	async getMostViewedCategories(@Query('days') days?: string) {
+		return this.analyticsService.getMostViewedCategories(days ? +days : 30);
 	}
 }

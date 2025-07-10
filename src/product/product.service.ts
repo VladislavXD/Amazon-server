@@ -6,6 +6,7 @@ import { generateSlug } from '../utils/generate-slug';
 import { PaginationService } from '../pagination/pagination.service';
 import { EnumProductSort, GetAllProductDto } from './dto/getAllProduct.dto';
 import { Prisma } from '@prisma/client';
+import { ProductViewDto, PopularProductsDto, RecentlyViewedDto } from './dto/product-view.dto';
 
 @Injectable()
 export class ProductService {
@@ -89,7 +90,7 @@ export class ProductService {
     }
   }
   
-  async byId(id: number){
+  async byId(id: number, userId?: number){
     const product = await this.prisma.product.findUnique({
       where: {
         id
@@ -98,6 +99,13 @@ export class ProductService {
     })
 
     if(!product) throw new Error("product not found")
+
+    // Автоматически добавляем просмотр при получении товара
+    if (userId) {
+      await this.addView({ productId: id, userId }).catch(() => {
+        // Игнорируем ошибки добавления просмотра
+      });
+    }
 
     return  product
   }
@@ -145,7 +153,7 @@ export class ProductService {
 
 
   async getSimelar(id: number){
-    const currentProduct = await this.byId(id)
+    const currentProduct = await this.byId(id) // Убираем userId для внутреннего вызова
 
     if(!currentProduct) {throw new NotFoundException("Current Product not found")}
     
@@ -211,4 +219,145 @@ export class ProductService {
 	}
 
 
+  
+  // Методы для работы с просмотрами товаров
+
+async addView(dto: ProductViewDto) {
+  const { productId, userId } = dto;
+
+  // Проверяем, существует ли продукт
+  const product = await this.prisma.product.findUnique({
+    where: { id: productId },
+  });
+
+  if (!product) {
+    throw new NotFoundException('Product not found');
+  }
+
+  // 1. Увеличиваем общий счетчик просмотров
+  await this.prisma.product.update({
+    where: { id: productId },
+    data: {
+      viewsCount: {
+        increment: 1,
+      },
+    },
+  });
+
+  // 2. Если пользователь авторизован — сохраняем просмотр в историю
+  if (userId) {
+    const lastView = await this.prisma.productViews.findFirst({
+      where: {
+        productId,
+        userId,
+      },
+      orderBy: {
+        viewedAt: 'desc',
+      },
+    });
+
+    const hourAgo = new Date(Date.now() - 60 * 60 * 1000);
+
+    if (lastView && lastView.viewedAt > hourAgo) {
+      // Не добавляем повторную запись
+      return { message: 'View counted, already recorded in history recently.' };
+    }
+
+    await this.prisma.productViews.create({
+      data: {
+        productId,
+        userId,
+      },
+    });
+
+    return { message: 'View counted and saved to history.' };
+  }
+
+  return { message: 'View counted.' };
+}
+
+
+  
+
+  async getPopularProducts(dto: PopularProductsDto) {
+    const { limit = 10, timeRange = 'all' } = dto;
+
+    let dateFilter: Date | undefined;
+    
+    switch (timeRange) {
+      case 'day':
+        dateFilter = new Date(Date.now() - 24 * 60 * 60 * 1000);
+        break;
+      case 'week':
+        dateFilter = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+        break;
+      case 'month':
+        dateFilter = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+        break;
+    }
+
+    const products = await this.prisma.product.findMany({
+      select: {
+        ...productReturnObject,
+        _count: {
+          select: {
+            views: dateFilter ? {
+              where: {
+                viewedAt: {
+                  gte: dateFilter
+                }
+              }
+            } : true
+          }
+        }
+      },
+      orderBy: {
+        views: {
+          _count: 'desc'
+        }
+      },
+      take: limit
+    });
+
+    return products.map(product => ({
+      ...product,
+      viewsCount: product._count.views
+    }));
+  }
+
+  async getRecentlyViewed(dto: RecentlyViewedDto) {
+    const { userId, limit = 10 } = dto;
+
+    const recentViews = await this.prisma.productViews.findMany({
+      where: {
+        userId
+      },
+      orderBy: {
+        viewedAt: 'desc'
+      },
+      take: limit,
+      distinct: ['productId'],
+      include: {
+        product: {
+          select: productReturnObject
+        }
+      }
+    });
+
+    return recentViews.map(view => ({
+      ...view.product,
+      viewedAt: view.viewedAt
+    }));
+  }
+
+  async getViewsCount(productId: number) {
+    const count = await this.prisma.product.findUnique({
+      where: {id: productId},
+      select: {
+        viewsCount: true
+      }
+    });
+
+    return { productId, viewsCount: count.viewsCount };
+  }
 }

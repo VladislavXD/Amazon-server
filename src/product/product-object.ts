@@ -10,6 +10,7 @@ export const productReturnObject: Prisma.ProductSelect = {
   price: true,
   createdAt: true,
   slug: true,
+  viewsCount: true, 
   category: {select: returnCategoryObject},
   reviews: {
     select: returnReviewObject
