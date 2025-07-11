@@ -2,16 +2,16 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// datasource db {
-//   provider = "postgresql"
-//   url      = env("DATABASE_URL")
-// }
-
 datasource db {
   provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  url      = env("DATABASE_URL")
 }
+
+// datasource db {
+//   provider = "postgresql"
+//   url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+//   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+// }
 
 model User {
   id        Int      @id @default(autoincrement())
@@ -21,8 +21,10 @@ model User {
   email    String @unique
   password String
 
+
   name      String @unique
   avatarUrl String @default("/uploads/defauld_avatar.png") @map("avatar_url")
+  description String? @default("") 
 
   phone     String    @default("")
   orders    Order[]

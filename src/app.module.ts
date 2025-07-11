@@ -11,9 +11,26 @@ import { CategoryModule } from './category/category.module';
 import { StatisticModule } from './statistic/statistic.module';
 import { PaginationModule } from './pagination/pagination.module';
 import { OrderModule } from './order/order.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
-  imports: [ConfigModule.forRoot(), AuthModule, UserModule, ProductModule, ReviewModule, CategoryModule, StatisticModule, PaginationModule, OrderModule],
+  imports: [
+    ConfigModule.forRoot(), 
+    AuthModule, 
+    UserModule, 
+    ProductModule, 
+    ReviewModule, 
+    CategoryModule, 
+    StatisticModule, 
+    PaginationModule, 
+    OrderModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
+      serveRoot: '/uploads', // будет доступно по http://localhost:3000/uploads
+    }),
+
+  ],
   controllers: [AppController],
   providers: [AppService, PrismaService],
 })

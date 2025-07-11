@@ -56,12 +56,14 @@ export class UserService {
 				name: dto.name,
 				avatarUrl: dto.avatarUrl,
 				phone: dto.phonne,
-				password: dto.password ? await hash(dto.password) : user.password
+				password: dto.password ? await hash(dto.password) : user.password,
+        description: dto.description 
 			}
 		})
 	}
 
 
+    
   async toggleFavorite(userId: number, productId: number){
     const user = await this.byId(userId)
 

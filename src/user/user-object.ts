@@ -7,4 +7,5 @@ export const returnUserObject: Prisma.UserSelect = {
   avatarUrl: true,
   password: false,
   phone: true,
+  description: true,
 } 

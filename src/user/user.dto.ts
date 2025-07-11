@@ -19,4 +19,8 @@ export class UserDto{
   @IsString()
   @IsOptional()
   phonne?: string
+
+  @IsString()
+  @IsOptional()
+  description?: string
 }
