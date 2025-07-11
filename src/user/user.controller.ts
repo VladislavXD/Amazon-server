@@ -37,32 +37,32 @@ export class UserController {
 	async getProfile(@CurrentUser('id') id: number) {
 		return this.userService.byId(id)
 	}
-	@Post('avatar')
-	@Auth()
-	@UseInterceptors(FileInterceptor('file', {
-    storage: diskStorage({
-      destination: './public/uploads/avatars', // куда сохранять
-      filename: (req, file, callback) => {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-        const ext = extname(file.originalname);
-        callback(null, `${file.fieldname}-${uniqueSuffix}${ext}`);
-      },
-    }),
-    limits: { fileSize: 5 * 1024 * 1024 }, // до 5 MB
-  }))
-	async uploadAvatar(
-    @UploadedFile() file: Express.Multer.File,
-    @CurrentUser('id') userId: number,
-  ) {
-    const avatarUrl = `/uploads/avatars/${file.filename}`;
+	// @Post('avatar')
+	// @Auth()
+	// @UseInterceptors(FileInterceptor('file', {
+  //   storage: diskStorage({
+  //     destination: './public/uploads/avatars', // куда сохранять
+  //     filename: (req, file, callback) => {
+  //       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+  //       const ext = extname(file.originalname);
+  //       callback(null, `${file.fieldname}-${uniqueSuffix}${ext}`);
+  //     },
+  //   }),
+  //   limits: { fileSize: 5 * 1024 * 1024 }, // до 5 MB
+  // }))
+	// async uploadAvatar(
+  //   @UploadedFile() file: Express.Multer.File,
+  //   @CurrentUser('id') userId: number,
+  // ) {
+  //   const avatarUrl = `/uploads/avatars/${file.filename}`;
 
-    await this.prisma.user.update({
-      where: { id: userId },
-      data: { avatarUrl },
-    });
+  //   await this.prisma.user.update({
+  //     where: { id: userId },
+  //     data: { avatarUrl },
+  //   });
 
-    return { avatarUrl };
-  }
+  //   return { avatarUrl };
+  // }
 
 
 	@UsePipes(new ValidationPipe())
