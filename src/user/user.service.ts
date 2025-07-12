@@ -4,6 +4,8 @@ import { returnUserObject } from './user-object';
 import { Prisma } from '@prisma/client';
 import { UserDto } from './user.dto';
 import { hash } from 'argon2';
+import { existsSync, unlinkSync } from 'fs';
+import { join } from 'path';
 
 @Injectable()
 export class UserService {
@@ -86,4 +88,58 @@ export class UserService {
       })
       return {message: 'Success'}
   }
+
+
+  async updateAvatar(userId: number, file: Express.Multer.File) {
+    if (!file) {
+      throw new BadRequestException('No file uploaded');
+    }
+
+    const avatarsPath = join(process.cwd(), 'public', 'uploads', 'avatars');
+
+    // 1. Получаем текущего пользователя
+    const currentUser = await this.prisma.user.findUnique({
+      where: { id: userId },
+      select: { avatarUrl: true }
+    });
+
+    // 2. Удаляем старый файл
+    if (currentUser?.avatarUrl && !currentUser.avatarUrl.includes('defauld_avatar.png')) {
+      const oldFileName = currentUser.avatarUrl.split('/').pop();
+      const oldFilePath = join(avatarsPath, oldFileName);
+
+      if (existsSync(oldFilePath)) {
+        try {
+          unlinkSync(oldFilePath);
+          console.log('Old avatar deleted:', oldFilePath);
+        } catch (err) {
+          console.error('Error deleting old avatar:', err);
+        }
+      }
+    }
+
+    // 3. Сохраняем новый
+    const avatarUrl = `${file.filename}`;
+
+    const updatedUser = await this.prisma.user.update({
+      where: { id: userId },
+      data: { avatarUrl },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        avatarUrl: true,
+      }
+    });
+
+    return { 
+      message: 'Avatar uploaded successfully',
+      avatarUrl,
+      user: updatedUser
+    };
+  }
+
 }
+
+
+

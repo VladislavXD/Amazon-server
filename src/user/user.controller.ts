@@ -1,4 +1,5 @@
 import {
+	BadRequestException,
 	Body,
 	Controller,
 	Get,
@@ -7,6 +8,7 @@ import {
 	Patch,
 	Post,
 	Put,
+	Res,
 	UploadedFile,
 	UseInterceptors,
 	UsePipes,
@@ -17,14 +19,16 @@ import { Auth } from '../auth/decorators/auth.decorator'
 import { CurrentUser } from '../auth/decorators/user.decorator'
 import { UserDto } from './user.dto'
 import { FileInterceptor } from '@nestjs/platform-express'
-import { diskStorage } from 'multer';
-import { extname } from 'path'
+import { diskStorage } from 'multer'
+import { extname, join } from 'path'
 import { PrismaService } from 'src/prisma.service'
+import { Response } from 'express'
+import { existsSync, unlinkSync } from 'fs'
 
 @Controller('users')
 export class UserController {
 	constructor(
-		private readonly userService: UserService ,
+		private readonly userService: UserService,
 		private prisma: PrismaService
 	) {}
 
@@ -37,32 +41,60 @@ export class UserController {
 	async getProfile(@CurrentUser('id') id: number) {
 		return this.userService.byId(id)
 	}
-	// @Post('avatar')
-	// @Auth()
-	// @UseInterceptors(FileInterceptor('file', {
-  //   storage: diskStorage({
-  //     destination: './public/uploads/avatars', // куда сохранять
-  //     filename: (req, file, callback) => {
-  //       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-  //       const ext = extname(file.originalname);
-  //       callback(null, `${file.fieldname}-${uniqueSuffix}${ext}`);
-  //     },
-  //   }),
-  //   limits: { fileSize: 5 * 1024 * 1024 }, // до 5 MB
-  // }))
-	// async uploadAvatar(
-  //   @UploadedFile() file: Express.Multer.File,
-  //   @CurrentUser('id') userId: number,
-  // ) {
-  //   const avatarUrl = `/uploads/avatars/${file.filename}`;
 
-  //   await this.prisma.user.update({
-  //     where: { id: userId },
-  //     data: { avatarUrl },
-  //   });
+	@Get('profile/:filename')
+	async getProfileImage(
+		@Param('filename') filename: string,
+		@Res() res: Response
+	) {
+		// Абсолютный путь
+		const imagePath = join(
+			process.cwd(),
+			'public',
+			'uploads',
+			'avatars',
+			filename
+		)
 
-  //   return { avatarUrl };
-  // }
+		if (!existsSync(imagePath)) {
+			return res.status(404).json({ error: 'File not found' })
+		}
+
+		return res.sendFile(imagePath)
+	}
+
+	@Post('avatar')
+	@Auth()
+	@UseInterceptors(
+		FileInterceptor('avatar', {
+			storage: diskStorage({
+				destination: './public/uploads/avatars',
+				filename: (req, file, callback) => {
+					const uniqueSuffix =
+						Date.now() + '-' + Math.round(Math.random() * 1e9)
+					const ext = extname(file.originalname)
+					callback(null, `avatar-${uniqueSuffix}${ext}`)
+				}
+			}),
+			fileFilter: (req, file, callback) => {
+				if (!file.originalname.match(/\.(jpg|jpeg|png|webp)$/)) {
+					return callback(
+						new BadRequestException('Only image files are allowed!'),
+						false
+					)
+				}
+				callback(null, true)
+			},
+			limits: { fileSize: 5 * 1024 * 1024 }
+		})
+	)
+	async uploadAvatar(
+		@UploadedFile() file: Express.Multer.File,
+		@CurrentUser('id') userId: number
+	) {
+		return this.userService.updateAvatar(userId, file)
+	}
+
 
 
 	@UsePipes(new ValidationPipe())
@@ -83,6 +115,3 @@ export class UserController {
 		return this.userService.toggleFavorite(id, +productId)
 	}
 }
-
-
-

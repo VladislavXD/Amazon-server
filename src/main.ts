@@ -1,5 +1,8 @@
 import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
+import { NestExpressApplication } from '@nestjs/platform-express'
+import { join } from 'path'
+
 
 async function bootstrap() {
 	try {
@@ -8,16 +11,13 @@ async function bootstrap() {
 		console.log('DATABASE_URL exists:', !!process.env.DATABASE_URL)
 		console.log('NODE_ENV:', process.env.NODE_ENV)
 		
-		const app = await NestFactory.create(AppModule, { 
+		const app = await NestFactory.create<NestExpressApplication>(AppModule, { 
 			cors: true,
 			logger: ['error', 'warn', 'log']
 		})
-
-		console.log('NestJS app created successfully')
-
-		// Configure CORS for production and development
+ 
 		app.enableCors({
-			origin: true, // Разрешаем все origins для диагностики
+			origin: true, // Разрешаем все 
 			methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
 			allowedHeaders: [
 				'Content-Type',

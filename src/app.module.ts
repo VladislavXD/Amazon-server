@@ -25,11 +25,10 @@ import { join } from 'path';
     StatisticModule, 
     PaginationModule, 
     OrderModule,
-    // ServeStaticModule.forRoot({
-    //   rootPath: join(__dirname, '..', 'public'),
-    //   serveRoot: '/uploads', // будет доступно по http://localhost:3000/uploads
-    // }),
-
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
+      serveRoot: '/uploads', 
+    }),
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],

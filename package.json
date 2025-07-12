@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@a2seven/yoo-checkout": "^1.1.4",
+    "@aws-sdk/client-s3": "^3.844.0",
     "@faker-js/faker": "^9.0.0",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.2.3",
