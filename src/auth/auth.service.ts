@@ -60,7 +60,7 @@ export class AuthService {
       data: {
         email: dto.email,
         name: faker.name.firstName(),
-        avatarUrl: 'defultAvatar.png',
+        avatarUrl: 'https://res.cloudinary.com/ddzprakot/image/upload/v1752342252/defultAvatar_eha8oh.png',
         phone: faker.phone.number({style: 'national'}),
         password: await hash(dto.password),
         description: 'write something about yourself',
