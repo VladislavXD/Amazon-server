@@ -24,7 +24,6 @@
   },
   "dependencies": {
     "@a2seven/yoo-checkout": "^1.1.4",
-    "@aws-sdk/client-s3": "^3.844.0",
     "@faker-js/faker": "^9.0.0",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.2.3",
@@ -39,6 +38,9 @@
     "argon2": "^0.41.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
+    "cloudinary": "^2.7.0",
+    "multer": "^2.0.1",
+    "multer-storage-cloudinary": "^4.0.0",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.2.0",

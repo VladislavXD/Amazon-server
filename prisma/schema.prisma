@@ -24,6 +24,7 @@ model User {
 
   name      String @unique
   avatarUrl String @default("/uploads/defauld_avatar.png") @map("avatar_url")
+  avatarPublicId String?
   description String? @default("") 
 
   phone     String    @default("")

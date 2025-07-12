@@ -5,6 +5,7 @@ import {
 	Get,
 	HttpCode,
 	Param,
+	ParseFilePipe,
 	Patch,
 	Post,
 	Put,
@@ -24,12 +25,14 @@ import { extname, join } from 'path'
 import { PrismaService } from 'src/prisma.service'
 import { Response } from 'express'
 import { existsSync, unlinkSync } from 'fs'
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service'
 
 @Controller('users')
 export class UserController {
 	constructor(
 		private readonly userService: UserService,
-		private prisma: PrismaService
+    private readonly cloudinaryService: CloudinaryService,
+    private readonly prisma: PrismaService
 	) {}
 
 	// get profile
@@ -42,58 +45,87 @@ export class UserController {
 		return this.userService.byId(id)
 	}
 
-	@Get('profile/:filename')
-	async getProfileImage(
-		@Param('filename') filename: string,
-		@Res() res: Response
-	) {
-		// Абсолютный путь
-		const imagePath = join(
-			process.cwd(),
-			'public',
-			'uploads',
-			'avatars',
-			filename
-		)
+	// @Get('profile/:filename')
+	// async getProfileImage(
+	// 	@Param('filename') filename: string,
+	// 	@Res() res: Response
+	// ) {
+	// 	// Абсолютный путь
+	// 	const imagePath = join(
+	// 		process.cwd(),
+	// 		'public',
+	// 		'uploads',
+	// 		'avatars',
+	// 		filename
+	// 	)
 
-		if (!existsSync(imagePath)) {
-			return res.status(404).json({ error: 'File not found' })
-		}
+	// 	if (!existsSync(imagePath)) {
+	// 		return res.status(404).json({ error: 'File not found' })
+	// 	}
 
-		return res.sendFile(imagePath)
-	}
+	// 	return res.sendFile(imagePath)
+	// }
 
-	@Post('avatar')
-	@Auth()
-	@UseInterceptors(
-		FileInterceptor('avatar', {
-			storage: diskStorage({
-				destination: './public/uploads/avatars',
-				filename: (req, file, callback) => {
-					const uniqueSuffix =
-						Date.now() + '-' + Math.round(Math.random() * 1e9)
-					const ext = extname(file.originalname)
-					callback(null, `avatar-${uniqueSuffix}${ext}`)
-				}
-			}),
-			fileFilter: (req, file, callback) => {
-				if (!file.originalname.match(/\.(jpg|jpeg|png|webp)$/)) {
-					return callback(
-						new BadRequestException('Only image files are allowed!'),
-						false
-					)
-				}
-				callback(null, true)
-			},
-			limits: { fileSize: 5 * 1024 * 1024 }
-		})
-	)
-	async uploadAvatar(
-		@UploadedFile() file: Express.Multer.File,
-		@CurrentUser('id') userId: number
-	) {
-		return this.userService.updateAvatar(userId, file)
-	}
+@Post("avatar")
+@Auth()
+@UseInterceptors(
+  FileInterceptor("avatar", {
+    limits: { fileSize: 5 * 1024 * 1024 },
+    fileFilter: (req, file, cb) => {
+      if (!file.mimetype.match(/^image\/(jpeg|png|webp)$/)) {
+        return cb(
+          new BadRequestException("Only image files are allowed!"),
+          false
+        );
+      }
+      cb(null, true);
+    },
+  })
+)
+async uploadAvatar(
+  @UploadedFile() file: Express.Multer.File,
+  @CurrentUser("id") userId: number,
+) {
+  if (!file) {
+    throw new BadRequestException("No file uploaded");
+  }
+
+  if (!file.mimetype.startsWith("image/")) {
+    throw new BadRequestException("Only images are allowed");
+  }
+
+  const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+      select: { avatarPublicId: true },
+    });
+
+  const uploadResult = await this.cloudinaryService.uploadImage(file.buffer, "avatars");
+
+
+  if (user?.avatarPublicId) {
+    await this.cloudinaryService.deleteImage(user.avatarPublicId).catch((err) => {
+      console.error("Failed to delete previous avatar:", err);
+    });
+  }
+  
+  const updatedUser = await this.prisma.user.update({
+    where: { id: userId },
+    data: { avatarUrl: uploadResult.url,
+      avatarPublicId: uploadResult.publicId,
+     },
+    select: {
+      id: true,
+      email: true,
+      avatarUrl: true,
+    },
+  });
+
+  return {
+    message: "Avatar uploaded successfully",
+    avatarUrl: uploadResult.url,
+    user: updatedUser,
+  };
+}
 
 
 
