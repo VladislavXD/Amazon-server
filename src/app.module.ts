@@ -13,6 +13,7 @@ import { PaginationModule } from './pagination/pagination.module';
 import { OrderModule } from './order/order.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { CloudinaryModule } from './cloudinary/Cloudinary.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { join } from 'path';
     StatisticModule, 
     PaginationModule, 
     OrderModule,
+    CloudinaryModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
       serveRoot: '/uploads', 

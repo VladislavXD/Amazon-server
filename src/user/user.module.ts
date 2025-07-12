@@ -3,10 +3,12 @@ import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { PrismaService } from '../prisma.service';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
+import { CloudinaryModule } from 'src/cloudinary/Cloudinary.module';
 
 @Module({
+  imports: [CloudinaryModule],
   controllers: [UserController],
-  providers: [UserService, PrismaService, CloudinaryService],
-  exports: [UserService, CloudinaryService]
+  providers: [UserService, PrismaService],
+  exports: [UserService]
 })
 export class UserModule {}
