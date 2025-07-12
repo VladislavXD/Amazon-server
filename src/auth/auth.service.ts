@@ -60,9 +60,10 @@ export class AuthService {
       data: {
         email: dto.email,
         name: faker.name.firstName(),
-        avatarUrl: faker.image.avatar(),
+        avatarUrl: 'defultAvatar.png',
         phone: faker.phone.number({style: 'national'}),
-        password: await hash(dto.password)
+        password: await hash(dto.password),
+        description: 'write something about yourself',
       }
     })
 
